@@ -9,16 +9,15 @@ import R
 from LineSensorData import LineSensorData
 sensorData = []
 lastSensor = (2,2,2,2,2)
-noneCnt = 0
 
 # 전진할 값
 forwardCase = (
     (1,0,2,0,1),
-    (0,0,2,0,0),
+    (0,0,1,0,0),
     (0,1,2,1,0),
     (1,1,0,1,1),
-    (1,0,0,1,1),
     (1,1,0,0,1),
+    (1,0,0,1,1)
 )
 
 # 좌회전 값
@@ -29,7 +28,6 @@ leftCase = (
     # (0,0,1,1,1),
 );
 
-
 # 왼쪽 미세조종 값
 smallLeftCase = (
     # (0,0,1,1,1),
@@ -37,11 +35,10 @@ smallLeftCase = (
     # (1,0,0,1,1),
 );
 
-rightBackUntilCase = (
-    (1,0,0,0,0),
-    (1,1,0,0,0),
-    # (1,1,1,1,1)
+rightCase = (
+    (2,2,2,2,0),
 )
+
 
 def init() :
     """
@@ -56,6 +53,9 @@ def init() :
     for fc in forwardCase :
         sensorData.append(LineSensorData(fc, R.forward))
 
+    for rc in rightCase :
+        sensorData.append(LineSensorData(rc, R.rightChk))
+
     for lc in leftCase :
         sensorData.append(LineSensorData(lc, R.left))
         sensorData.append(LineSensorData(lc[-1::-1], R.right))
@@ -64,17 +64,6 @@ def init() :
         sensorData.append(LineSensorData(slc, R.smallLeft))
         sensorData.append(LineSensorData(slc[-1::-1], R.smallRight))
 
-    for ruc in rightBackUntilCase :
-        sensorData.append(LineSensorData(ruc, R.backRightUntil));
-
-    sensorData.append(LineSensorData((0,0,0,0,0), R.right));
-    sensorData.append(LineSensorData((0,0,0,0,1), R.right));
-    sensorData.append(LineSensorData((1,1,1,0,0), R.right));
-    sensorData.append(LineSensorData((0,0,1,1,0), R.right))
-    sensorData.append(LineSensorData((1,1,1,1,1), R.rightUntil))
-    # sensorData.append(LineSensorData((1,1,1,0,0), R.right));
-    # sensorData.append(LineSensorData((1,1,1,1,1), R.right));
-
 
     #elif LineSensorData[0] + [LineSensorData[1] < LineSensorData[3] + LineSensorData[4]:
 
@@ -82,35 +71,22 @@ def chkStatus(sensor) :
     """센서값을 받아 검색 한 뒤 올바른 callback 함수를 반환해줌"""
     global lastSensor
     global forwardCase
-    global noneCnt
 
     if sensor == (1,1,1,1,1) :
-        # return R.left
-        # print "==== JTJ ===>"
-        # print sensor
-        # print lastSensor
-        # print "<=== JTJ ===="
-        # print forwardCase
-        # if cmpStatus(lastSensor, forwardCase) :
-        #     print "\t==== JTJ ===>"
-        #     return R.rightUntil
-        #     print "\t<=== JTJ ===="
-
-        print "==== JTJ ===>"
-        print noneCnt
-        print "<=== JTJ ===="
-        if noneCnt == 3 :
-            noneCnt = 0
-            return R.rightUntilForward
-
-        noneCnt += 1
+        # return R.forward
         print "Called Last Sensor"
+        if cmpStatus(lastSensor, forwardCase) :
+            return R.UTurn
+        # if cmpStatus(lastSensor, leftCase) :
+        #     return R.UTurn
+        # elif cmpStatus(lastSensor, forwardCase) :
+        #     return R.UTurn
+        # elif cmpStatus(lastSensor, forwardCase) :
+        #     return R.UTurn
+        # return R.UTurn
         sensor = lastSensor;
-    else :
-        noneCnt = 0
 
     lastSensor = sensor
-    # cbFunc = R.rightUntil
     cbFunc = R.forward
 
     for data in sensorData :

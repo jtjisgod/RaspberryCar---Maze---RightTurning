@@ -18,4 +18,3 @@ Turn.py:라인트레이싱에 대한 우회전/좌회전 모듈입니다.<br>
 
 4차과제 장애물 회피 라인트레이싱 과제 시도 영상: <https://drive.google.com/open?id=1jQFKgjayZ0XbVqC7KQlXDsVrZzsF9QOb><br>
 
-# RaspberryCar---Maze---RightTurning

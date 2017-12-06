@@ -25,10 +25,8 @@ def main() :
             sensor = FiveSensor.get()
             print("")
             print(sensor)
-            # if R.huddle() == True :
-            #     continue
             R.LineSensor.chkStatus(sensor)()
-            time.sleep(0.03)
+            time.sleep(0.01)
             """베터리 만땅 = 0.06"""
             """베터리 없음 = 0.03"""
             # time.sleep(0.03)

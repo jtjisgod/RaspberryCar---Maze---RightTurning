@@ -53,3 +53,62 @@ def smallLeft() :
     RightMotor(1)
     LeftPwm.ChangeDutyCycle(R.speed*0.5)
     RightPwm.ChangeDutyCycle(R.speed*0.5)
+
+def rightChk() :
+    """오른쪽 가는 것을 체크한다"""
+    print "==== RIGHT CHK ====>"
+
+    R.forward()
+    time.sleep(0.1)
+
+    while True :
+        sensor = R.FiveSensor.get()
+        print "Outing",
+        print sensor
+        if not R.LineSensor.cmpStatus(sensor, R.LineSensor.forwardCase) :
+            break
+        R.right()
+        time.sleep(0.01)
+
+    while True :
+        sensor = R.FiveSensor.get()
+        print "Ining",
+        print sensor
+        if R.LineSensor.cmpStatus(sensor, R.LineSensor.forwardCase) :
+            break
+        R.right()
+        time.sleep(0.01)
+    print "<==== RIGHT CHK ===="
+    # time.sleep(0.1)
+
+def UTurn() :
+    """ U-Turn """
+    while True :
+        sensor = R.FiveSensor.get()
+        print "U-Turn",
+        print sensor
+        if R.LineSensor.cmpStatus(sensor, R.LineSensor.forwardCase) :
+            break
+        R.right()
+        time.sleep(0.01)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #

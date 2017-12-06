@@ -88,6 +88,12 @@ def go_forward_any(speed):
     LeftPwm.ChangeDutyCycle(speed)
     RightPwm.ChangeDutyCycle(speed)
 
+def go_backward_any(speed):
+    """LeftMotor, RightMotor를 호출해서 스피드에 따라 후진한다."""
+    LeftMotor(0)
+    RightMotor(0)
+    LeftPwm.ChangeDutyCycle(speed)
+    RightPwm.ChangeDutyCycle(speed)
 
 def forward() :
     """출력하고 전진한다"""
@@ -99,12 +105,6 @@ def backward() :
     print ("Backward")
     go_backward_any(R.speed)
 
-def go_backward_any(speed):
-    """LeftMotor, RightMotor를 호출해서 스피드에 따라 후진한다."""
-    LeftMotor(0)
-    RightMotor(0)
-    LeftPwm.ChangeDutyCycle(speed)
-    RightPwm.ChangeDutyCycle(speed)
 
 def stop():
     """멈춘다"""
