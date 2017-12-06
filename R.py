@@ -6,7 +6,7 @@
 """
 
 import Run
-import Huddle
+# import Huddle
 import Turn
 import LineSensor
 import FiveSensor
@@ -27,6 +27,11 @@ left = Turn.left
 smallLeft = Turn.smallLeft
 smallRight = Turn.smallRight
 stop = Run.stop
-huddle = Huddle.huddle
+backRightUntil = Turn.backRightUntil
+rightUntil = Turn.rightUntil
+# huddle = Huddle.huddle
 
-speed = 100 # Foward, Backward speed
+def rightUntilForward() :
+    return rightUntil(LineSensor.forwardCase)
+
+speed = 40 # Foward, Backward speed
